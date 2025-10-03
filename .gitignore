@@ -1,0 +1,36 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# per-folder
+frontend/node_modules/
+backend/node_modules/
+
+# build
+dist/
+build/
+out/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+env/
+*.egg-info/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# env / secrets
+.env
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# system
+.DS_Store
+Thumbs.db
+*.log
