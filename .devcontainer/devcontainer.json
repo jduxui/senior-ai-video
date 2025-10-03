@@ -1,14 +1,32 @@
 {
-  "name": "Senior AI Video Dev",
-  "dockerFile": "Dockerfile",
-  "context": "..",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+  "name": "senior-ai-video",
+  "build": {
+    "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "cd backend && npm install || true && cd ../agent && python3 -m venv .venv || true && . .venv/bin/activate && pip install -r requirements.txt || true",
+  "context": "..",
+
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "python.defaultInterpreterPath": "/workspace/agent/.venv/bin/python"
+  },
+
+  "postCreateCommand": "
+    cd backend && npm install || true && \
+    cd ../frontend && npm install || true && \
+    cd ../agent && python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt || true
+  ",
+
   "forwardPorts": [5000, 3000],
+  
   "extensions": [
     "ms-azuretools.vscode-docker",
-    "ms-vscode-remote.remote-wsl"
-  ]
+    "ms-vscode-remote.remote-wsl",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+
+  "remoteUser": "node",
+  "mounts": ["source=${env:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"]
 }
